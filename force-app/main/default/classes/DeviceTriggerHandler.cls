@@ -16,10 +16,9 @@ public with sharing class DeviceTriggerHandler {
             }
         }
 
-        if(employeeIds.size() > 0){
-            List<Contact> employees = [ SELECT Name, (SELECT Name, ID FROM Devices__r WHERE Type__c = 'Laptop') FROM Contact WHERE ID IN: employeeIds ];       
+        if(employeeIds.size() > 0){     
             String errorMessage = '';
-            for(Contact contact : employees){
+            for(Contact contact : [ SELECT Name, (SELECT Name, ID FROM Devices__r WHERE Type__c = 'Laptop') FROM Contact WHERE ID IN: employeeIds ]){
                 if(contact.Devices__r.size() == 1 ){
                     errorMessage = 'Cannot reassign or delete an employee’s only Laptop. Please assign ' + contact.Name +' another Laptop first.';          
                     newDevices.get(contact.Devices__r[0].Id).addError(errorMessage);  
@@ -38,10 +37,9 @@ public with sharing class DeviceTriggerHandler {
                 employeeIds.add(device.AssignedTo__c);
             }
         }
-
-        List<Contact> employees = [ SELECT Name, (SELECT Name, ID FROM Devices__r WHERE Type__c = 'Laptop') FROM Contact WHERE ID IN: employeeIds ];       
+     
         String errorMessage = '';
-            for(Contact contact : employees){
+            for(Contact contact : [ SELECT Name, (SELECT Name, ID FROM Devices__r WHERE Type__c = 'Laptop') FROM Contact WHERE ID IN: employeeIds]){
                 if(contact.Devices__r.size() == 1 ){
                     errorMessage = 'Cannot reassign or delete an employee’s only Laptop. Please assign ' + contact.Name +' another Laptop first.';
                     Trigger.oldMap.get(contact.Devices__r[0].Id).addError(errorMessage);               

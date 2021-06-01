@@ -44,7 +44,7 @@
                     </header>
 
                     <div class="slds-modal__content slds-p-around--medium">
-                        <center><b>Are you sure you want to delete this item?</b></center>
+                        <center><b>Are you sure you want to delete this device?</b></center>
                     </div>
 
                     <footer class="slds-modal__footer">

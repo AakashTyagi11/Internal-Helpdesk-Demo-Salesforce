@@ -19,8 +19,8 @@ public with sharing class DeviceListController {
         Device__c device = [ SELECT ID, Name FROM Device__c WHERE ID =: recordId ];
         try {
             delete Device;  
-        } catch (DmlException de) {
-            throw new AuraHandledException(de.getDmlMessage(0));
+        } catch (DmlException dmlException) {
+            throw new AuraHandledException(dmlException.getDmlMessage(0));
         }       
     }
 }

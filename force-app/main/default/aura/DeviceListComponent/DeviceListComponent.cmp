@@ -1,0 +1,61 @@
+<aura:component implements = "force:appHostable, flexipage:availableForAllPageTypes, force:hasRecordId" controller = "DeviceListController" access="global">
+
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.handleFetchDevices}"/>
+    <aura:attribute type="Device__c[]" name="deviceList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="sortedBy" type="String" default="Name"/>
+    <aura:attribute name="sortedDirection" type="string" default="asc" />
+    <aura:attribute name="empty" type="Boolean" default="false"/>
+    <aura:attribute name="toDelete" type="Id" />
+    <aura:attribute name="showConfirmDialog" type="boolean" default="false"/>
+
+    <lightning:card  title="Devices" iconName="custom:custom100" class="slds-card_boundary"> 
+        <p class="slds-p-horizontal_small">
+           <b>Assigned Laptops and Desktops.</b>
+        </p>
+         <lightning:datatable data="{! v.deviceList }" 
+                         columns="{! v.mycolumns }" 
+                         keyField="Id"
+                         hideCheckboxColumn="true"
+                         onrowaction="{!c.handleConfirmDialog}"
+                         onsort="{!c.handleUpdateSorting}"
+                         sortedBy="{!v.sortedBy}"
+                         sortedDirection="{!v.sortedDirection}"/>
+
+        <!--Message for empty table-->
+        <aura:if isTrue="{! v.empty}">        
+            <p class="slds-align_absolute-center"> 
+                *No Desktop or Laptop is assigned to this employee!
+            </p>
+            <lightning:button name="create" variant="brand" label="Create" class="slds-align_absolute-center" onclick="{!c.handleCreateRecords}"/>
+            
+        </aura:if>
+     </lightning:card>
+     
+     <!--Confirm delete Modal-->
+    <div class="slds-m-around_xx-large">   
+        <aura:if isTrue="{!v.showConfirmDialog}">
+            <div role="dialog" class="slds-modal slds-fade-in-open ">
+                <div class="slds-modal__container">
+
+                    <header class="slds-modal__header">
+                        <h1 class="slds-text-heading--medium">Confirmation</h1>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <center><b>Are you sure you want to delete this item?</b></center>
+                    </div>
+
+                    <footer class="slds-modal__footer">
+                        <lightning:button name='No' label='No' onclick='{!c.handleConfirmDialogNo}'/>
+                        <lightning:button variant="brand" name='Yes' label='Yes' onclick='{!c.handleConfirmDialogYes}'/>
+                    </footer>
+                    
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open">
+            </div>            
+        </aura:if>
+    </div>
+</aura:component>

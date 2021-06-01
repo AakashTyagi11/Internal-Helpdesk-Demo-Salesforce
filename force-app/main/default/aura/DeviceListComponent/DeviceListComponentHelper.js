@@ -105,7 +105,7 @@
         component.set("v.deviceList", data);
     },
 
-    //determine the sort type.
+    //determine the sort criteria.
     sortBy: function (field, reverse) {
         var key = function(x) {return x[field]};
         reverse = !reverse ? 1 : -1;

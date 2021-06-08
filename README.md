@@ -1,3 +1,13 @@
+#Internal Helpdesk
+To build an innovative ‘Internal Helpdesk System’ for internal users, to make it easier for them to perform certain day to day activities. 
+## Followed best practices
+- One Trigger Per Object. 
+- Bulkified Trigger. 
+- Logic-less Trigger. 
+- No SOQL, DML inside for loop.
+- Use of Collections (List, Set and Map).
+- SOQL For Loops
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.

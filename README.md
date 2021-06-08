@@ -1,4 +1,4 @@
-#Internal Helpdesk
+# Internal Helpdesk
 To build an innovative ‘Internal Helpdesk System’ for internal users, to make it easier for them to perform certain day to day activities. 
 ## Followed best practices
 - One Trigger Per Object. 
